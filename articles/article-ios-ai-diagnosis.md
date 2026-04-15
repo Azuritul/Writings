@@ -6,7 +6,19 @@ topics: [Kiro, iOS, Swift, AI, CLI]
 published: true
 ---
 
-# しばらく放置したiOSアプリをAIエージェントに診断させて開発再開した話
+個人開発で作った iOS の語学学習アプリを、半年くらい放置していました。  
+バックエンドを`SwiftData`から`Firestore`に移行する途中で別の仕事が入り、「どこまでやったのか」「何が残っているのか」がわからなくなってしまったからです。
+
+自分でコードとドキュメントを最初から全部読み直すのは正直つらい。  
+そこで今回は、`Kiro CLI`の **カスタムエージェント** にコードベースを読ませて、問題点をGitHub Issueとして自動生成させてみました。
+
+この記事では、
+
+- 放置していた iOS アプリの現状を AI エージェントに診断させる手順
+- Kiro CLI で「Swift 用コードベース分析エージェント」を定義する方法
+- 複数モデルでの実行結果と、安いモデルでどこまで戦えるか
+
+あたりをまとめます。
 
 ## しばらく放置したiOSアプリ
 
@@ -54,8 +66,22 @@ published: true
   "name": "Swift Codebase Analyst",
   "description": "Analyzes Swift/iOS codebase using Swift-specific best practices",
   "prompt": "file://./prompts/swift-codebase-analyst.md",
-  "tools": ["read", "shell", "report", "thinking", "grep", "glob"],
-  "allowedTools": ["read", "shell", "report", "thinking", "grep", "glob"],
+  "tools": [
+    "read",
+    "shell",
+    "report",
+    "thinking",
+    "grep",
+    "glob"
+  ],
+  "allowedTools": [
+    "read",
+    "shell",
+    "report",
+    "thinking",
+    "grep",
+    "glob"
+  ],
   "resources": [
     "skill://~/.kiro/skills/swiftui-pro/SKILL.md",
     "skill://~/.kiro/skills/swift-concurrency-pro/SKILL.md"
@@ -194,7 +220,11 @@ The iOS app has commented-out SwiftData model container initialization in `AppMa
 そこでV2ではスコープを絞りました：
 
 ```
-SCOPE: Primary focus is the iOS app under apps/mobile-ios/. Read apps/admin-web/ types and Firestore service files ONLY to cross-check data model consistency — do not analyze the web app's UI, components, or implementation quality.
+SCOPE:
+Primary focus is the iOS app under apps/mobile-ios/.
+
+Read apps/admin-web/ types and Firestore service files ONLY to cross-check data model consistency.
+Do not analyze the web app's UI, components, or implementation quality.
 ```
 
 この一文を追加しただけで、分析がiOSに集中するようになりました。モノレポでエージェントを使うときは、スコープ制御がかなり重要だと感じています。
