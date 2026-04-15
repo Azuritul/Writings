@@ -2,7 +2,7 @@
 title: "放置していたiOSアプリをAIに診断させたら、最安モデルが実用的だった"
 emoji: "💭"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [AI, iOS, Swift, 個人開発, Kiro CLI]
+topics: [AI, iOS, Swift, 個人開発, Kiro]
 published: true
 ---
 
