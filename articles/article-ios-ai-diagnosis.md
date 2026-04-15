@@ -1,8 +1,8 @@
 ---
-title: "しばらく放置したiOSアプリをAIエージェントに診断させて開発再開した話"
+title: "放置していたiOSアプリをAIに診断させたら、最安モデルが実用的だった"
 emoji: "💭"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [Kiro, iOS, Swift, AI, CLI, 個人開発]
+topics: [AI, iOS, Swift, 個人開発, Kiro CLI, LLM]
 published: true
 ---
 
