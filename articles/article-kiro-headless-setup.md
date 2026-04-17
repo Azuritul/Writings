@@ -6,16 +6,9 @@ topics: [AI, Kiro, GitHub, Swift, 個人開発]
 published: false
 ---
 
-<!-- 
-  シリーズ記事3本目。
-  記事1: AIにコードベースを診断させてIssue自動生成
-  記事2: 4モデル比較
-  記事3（本記事）: headless modeでエージェント自動実行を実現
--->
+Kiro CLIのカスタムエージェントを使って、iOSアプリのコードベース分析やGitHub Issue自動生成をやっています。ただ、これまでの`Kiro CLI`は認証に対話的な操作が必須で、無人での自動実行ができなかった。
 
-Kiro CLIのカスタムエージェントを使って、iOSアプリのコードベース分析やGitHub Issue自動生成をやっている。ただ、これまでのKiro CLIは認証に対話的な操作が必須で、無人での自動実行ができなかった。
-
-[Kiro CLIのheadless mode](https://kiro.dev/blog/introducing-headless-mode/)がリリースされて、これが解決しました。セットアップからGitHub Actionsでの自動実行まで、実際にやったことを書いていく。
+[headless mode](https://kiro.dev/blog/introducing-headless-mode/)がリリースされて、これが解決しました。セットアップからGitHub Actionsでの自動実行まで、実際にやったことを書いていきます。
 
 :::message
 この記事はシリーズの3本目です。カスタムエージェントの作り方やモデル比較については前回の記事を参照してください。
@@ -83,7 +76,7 @@ kiro-cli chat --agent "Swift Codebase Analyst" --no-interactive \
 
 ### ワークフローの作成
 
-`.github/workflows/nightly-analysis.yml`を作成してpushします。
+ワークフローファイル`.github/workflows/nightly-analysis.yml`を作成してpushします。
 
 ```yaml
 name: Nightly Codebase Analysis
