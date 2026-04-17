@@ -2,7 +2,7 @@
 title: "Kiro CLIのheadless modeでエージェント自動実行できるようになった"
 emoji: "🌙"
 type: "tech"
-topics: [AI, iOS, Swift, 個人開発, Kiro]
+topics: [AI, Kiro, GitHub, Swift, 個人開発]
 published: false
 ---
 
