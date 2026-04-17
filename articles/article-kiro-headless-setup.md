@@ -3,7 +3,7 @@ title: "Kiro CLIのheadless modeでエージェント自動実行できるよう
 emoji: "🌙"
 type: "tech"
 topics: [AI, Kiro, GitHub, Swift, 個人開発]
-published: false
+published: true
 ---
 
 Kiro CLIのカスタムエージェントを使って、iOSアプリのコードベース分析やGitHub Issue自動生成をやっています。ただ、これまでの`Kiro CLI`は認証に対話的な操作が必須で、無人での自動実行ができなかった。
