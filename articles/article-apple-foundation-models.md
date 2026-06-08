@@ -1,5 +1,5 @@
 ---
-title: "WWDC 2026前にFoundation Modelsの基本を触ってみた"
+title: "WWDC 2026前にFoundation Modelsの基本を試してみた"
 emoji: "🍎"
 type: "tech"
 topics: [FoundationModels, Swift, AI, AppleIntelligence, iOS]
@@ -10,17 +10,17 @@ WWDC 2026のキーノートがもう目前です。
 
 このタイミングでWWDC 2025の話を書くのは、正直かなり今さら感があります。
 
-ただ、今年のWWDCではApple Intelligenceまわりにも何か進展があるのでは、と予想半分・個人的な希望半分で見ています。去年の発表内容をちゃんと触らないまま今年の発表を見るのも微妙なので、まずは`Foundation Models`フレームワークを触ってみました。
+ただ、今年のWWDCではApple Intelligenceまわりにも何か進展があるのでは、と予想半分・個人的な希望半分で見ています。去年の発表内容をちゃんと試さないまま今年の発表を見るのも微妙なので、まずは`Foundation Models`フレームワークを触ってみました。
 
 この記事は、WWDC25の[Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/)をベースにしています。
 
-実際に触ってみた範囲で、Foundation Modelsの基本的な使い方と、iOSアプリに組み込むときに気にした方がよさそうな点をまとめます。
+実際に触ってみた範囲で、Foundation Modelsの基本的な使い方と、iOSアプリに組み込むときに気になった点をまとめます。
 
 ## Foundation Modelsとは
 
 `Foundation Models`は、Apple Intelligenceを支えるオンデバイスLLMにアクセスするためのフレームワークです。
 
-ざっくり言うと、Apple Intelligenceの中核にあるオンデバイス言語モデルを、Swiftから直接呼び出せるようにするものです。クラウドのLLM APIにリクエストを投げるのではなく、ユーザーの端末上で生成・要約・分類・構造化出力・tool callingを実行できます。
+ざっくり言うと、Apple Intelligenceの中核にあるオンデバイスの言語モデルを、Swiftから直接呼び出せるようにするものです。クラウドのLLM APIにリクエストを投げるのではなく、ユーザーの端末上で生成・要約・分類・構造化出力・tool callingを実行できます。
 
 Appleの公式ドキュメントでは、主な用途として次のようなタスクが挙げられています。
 
@@ -30,13 +30,13 @@ Appleの公式ドキュメントでは、主な用途として次のようなタ
 - 文章の改善
 - ゲーム内の短い会話生成
 - クリエイティブなテキスト生成
-- などなど
+- など
 
 ## ベースにしたWWDCセッション
 
-本記事は、[Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/)をベースにしています。Foundation Modelsの全体像を掴むには、このセッションがちょうどよかったです。
+この記事は、[Meet the Foundation Models framework](https://developer.apple.com/videos/play/wwdc2025/286/)をベースにしています。Foundation Modelsの全体像を掴むには、このセッションがちょうどよかったです。
 
-Foundation Models関連では、他にも次のセッションがあります。こちらはもう少し実装寄りです。まだ見ていないので、WWDC 2026のセッションと一緒に見ることになりそうです。
+Foundation Models関連では、他にも次のセッションがあります。こちらはもう少し実装寄りです。この3本はまだ見ていないので、別途見る予定です。
 
 | 動画 | 見るポイント |
 |---|---|
@@ -48,7 +48,7 @@ Foundation Models関連では、他にも次のセッションがあります。
 
 Foundation Modelsは、いきなりアプリの画面に組み込まなくても、Xcode上で試せます。
 
-Foundation Modelを使う場合、どのプロンプトがうまく動くかを試す作業が必要になります。`#Playground`macro経由で、数行のコードでオンデバイスモデルにプロンプトを投げられます。たとえば「東京を観光するなら、どこがおすすめですか？」と試すと、右側のcanvasにモデルの出力が表示されます。
+Foundation Modelsを使う場合、どのプロンプトがうまく動くかを試す作業が必要になります。`#Playground` macroを使うと、数行のコードでオンデバイスモデルにプロンプトを投げられます。たとえば「東京を観光するなら、どこがおすすめですか？」と試すと、右側のキャンバスにモデルの出力が表示されます。
 
 アプリ内で定義している型にもアクセスできます。
 
@@ -62,7 +62,7 @@ Foundation Modelを使う場合、どのプロンプトがうまく動くかを�
 
 Foundation Modelsを使う前に、まず可用性を確認します。
 
-Foundation ModelsはApple Intelligenceに依存しているため、環境によっては利用できません。たとえば、次のようなケースです。
+Foundation ModelsはApple Intelligenceに依存しているため、環境によっては利用できません。たとえば、次のようなケースがあります。
 
 - デバイスがApple Intelligenceに対応していない
 - Apple Intelligenceが設定で無効になっている
@@ -110,9 +110,10 @@ import Playgrounds
 ```
 
 ### ガイド付き生成
+
 前のスクリーンショットを見るとわかりますが、`respond(to:)`のレスポンスはプレーンテキストで返ってきます。そのままアプリ内で再利用するには少し扱いづらいです。
 
-そこでFoundation Modelsのガイド付き生成を使うと、この部分をSwift側の型定義に寄せられます。
+そこでFoundation Modelsのガイド付き生成を使うと、この部分をSwiftの型定義に寄せて扱えます。
 
 `@Generable`を使うと、モデルの出力をSwiftの型として受け取れます。たとえば東京の観光スポットの候補を作るなら、こういう型を定義できます。
 
@@ -137,7 +138,7 @@ struct SpotSuggestions {
 }
 ```
 
-`@Generable`の型では、primitive型だけでなく、配列や他の`Generable`な型も使えます。たとえば、次のような形にもできます。
+`@Generable`の型では、プリミティブ型だけでなく、配列や他の`Generable`な型も使えます。たとえば、次のような形にもできます。
 
 ```swift
 @Generable
@@ -159,7 +160,7 @@ struct Spot {
 
 ![複合型](/images/article-apple-foundation-models/generable.png)
 
-ガイド付き生成を使うと、出力の構造をある程度保証できます。プロンプト側でJSON形式を細かく指示しなくても、Swiftの型で期待する形を表現できます。動画では、構造を指定することで推論速度や正確さにも良い影響があると説明されていました。
+ガイド付き生成を使うと、出力の構造をある程度保証できます。プロンプト側でJSON形式を細かく指示しなくても、Swiftの型で期待する形を表現できます。セッションでは、構造を指定することで推論速度や正確さにも良い影響があると説明されていました。
 
 
 ### `streamResponse`で途中状態を見る
@@ -170,7 +171,7 @@ struct Spot {
 
 `streamResponse`では、完成した最終結果ではなく、生成途中のスナップショットを受け取れます。状態に応じてUIを少しずつ更新できるので、最終結果を待つより自然に見せられます。token単位の差分を自分でつなげるというより、現時点でモデルが生成できている内容をsnapshotとして見るイメージです。
 
-例えば：
+たとえば:
 
 ```swift
 var session: LanguageModelSession = LanguageModelSession()
@@ -191,7 +192,7 @@ func suggestSpotStream() async {
 }
 ```
 
-### Tool Callingは別記事で試す
+### Tool callingは別記事で試す
 
 Foundation Modelsには、ツール呼び出し（Tool calling）という仕組みもあります。
 
@@ -199,7 +200,7 @@ Tool callingは、モデルが必要に応じてアプリ内に定義した処�
 
 ポイントは、モデルに「何でも直接やらせる」のではなく、アプリ側で使ってよい処理をtoolとして定義しておくことです。モデルはどのtoolを使うかを判断し、Foundation Modelsフレームワークがアプリ側に定義したtoolコードを呼び出します。
 
-toolの結果はセッションのtranscriptに追加され、その結果も含めてモデルが最終的な応答を生成します。これにより、プロンプトだけでは扱いづらいアプリ固有のデータや、MapKitのような信頼できる情報源を使いやすくなります。ただし、toolの設計や引数の定義、どこまでモデルに任せるかの判断が必要になります。
+toolの結果はセッションのtranscriptに追加され、その結果も含めてモデルが最終的な応答を生成します。プロンプトだけでは扱いづらいアプリ固有のデータや、MapKitのような信頼できる情報源を使いやすくなる仕組みです。ただし、toolの設計や引数の定義、どこまでモデルに任せるかの判断が必要になります。
 
 この記事では深掘りしません。具体例は別記事で試します。
 
@@ -213,11 +214,13 @@ toolの結果はセッションのtranscriptに追加され、その結果も含
 - [Deep dive into the Foundation Models framework - WWDC25 - Videos - Apple Developer](https://developer.apple.com/videos/play/wwdc2025/301/)
 
 ### APIドキュメント
+
 - [Foundation Models | Apple Developer Documentation](https://developer.apple.com/documentation/FoundationModels/)
 - [SystemLanguageModel | Apple Developer Documentation](https://developer.apple.com/documentation/foundationmodels/systemlanguagemodel)
 - [LanguageModelSession | Apple Developer Documentation](https://developer.apple.com/documentation/foundationmodels/languagemodelsession)
 
 ### チュートリアル
+
 - [Generating Swift data structures with guided generation | Apple Developer Documentation](https://developer.apple.com/documentation/FoundationModels/generating-swift-data-structures-with-guided-generation)
 - [Expanding generation with tool calling | Apple Developer Documentation](https://developer.apple.com/documentation/foundationmodels/expanding-generation-with-tool-calling)
 - [Generating content and performing tasks with Foundation Models | Apple Developer Documentation](https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models)
