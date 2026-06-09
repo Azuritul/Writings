@@ -9,6 +9,8 @@
 |---|---|---|
 | [放置していたiOSアプリをAIに診断させたら、最安モデルが実用的だった](articles/article-ios-ai-diagnosis.md) | Kiro CLI カスタムエージェントでコードベース分析 → GitHub Issue 自動生成 | ✅ 公開済 |
 | [コスト倍率と品質は比例しない — Kiro CLI 4モデル比較](articles/article-kiro-model-comparison.md) | 同じプロンプトで4モデル（Haiku / Qwen3 / Auto / MiniMax）を比較 | ✅ 公開済 |
+| [Kiro CLIのheadless modeでエージェント自動実行できるようになった](articles/article-kiro-headless-setup.md) | Kiro CLI headless modeでカスタムエージェントを自動実行 | ✅ 公開済 |
+| [WWDC 2026前にFoundation Modelsの基本を試してみた](articles/article-apple-foundation-models.md) | WWDC25のFoundation Modelsセッションをベースに基本的な使い方を試す | ✅ 公開済 |
 
 ## ライセンス
 
