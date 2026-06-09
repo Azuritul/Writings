@@ -87,7 +87,7 @@ WWDC26のセッション「[What’s new in Xcode 27](https://developer.apple.co
 
 ## Instrumentsと「Top Functions」
 
-* パフォーマンス分析ツールのInstrumentsに、Top Functionsビューが追加されました。重い関数や時間を使っているコードパスを確認できます。
+* パフォーマンス分析ツールのInstrumentsに、Top Functionsビューが追加されました。負荷の高い関数や処理時間の長いコードパスを確認できます。
 
 ## Xcode Cloudの導入プロセスの簡略化
 
