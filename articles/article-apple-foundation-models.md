@@ -1,5 +1,5 @@
 ---
-title: "WWDC 2026前にFoundation Modelsの基本を試してみた"
+title: "iOS Foundation Modelsの基本を試してみた"
 emoji: "🍎"
 type: "tech"
 topics: [FoundationModels, Swift, AI, AppleIntelligence, iOS]
