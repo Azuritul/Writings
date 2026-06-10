@@ -11,6 +11,7 @@
 | [コスト倍率と品質は比例しない — Kiro CLI 4モデル比較](articles/article-kiro-model-comparison.md) | 同じプロンプトで4モデル（Haiku / Qwen3 / Auto / MiniMax）を比較 | ✅ 公開済 |
 | [Kiro CLIのheadless modeでエージェント自動実行できるようになった](articles/article-kiro-headless-setup.md) | Kiro CLI headless modeでカスタムエージェントを自動実行 | ✅ 公開済 |
 | [WWDC 2026前にFoundation Modelsの基本を試してみた](articles/article-apple-foundation-models.md) | WWDC25のFoundation Modelsセッションをベースに基本的な使い方を試す | ✅ 公開済 |
+| [WWDC 2026で発表されたXcode 27の新機能メモ](articles/article-xcode-27.md) | WWDC26の「What’s new in Xcode 27」から気になったアップデートを整理 | ✅ 公開済 |
 
 ## ライセンス
 
