@@ -165,9 +165,9 @@ struct Spot {
 
 その場合は、`session.streamResponse`を使います。
 
-`streamResponse`では、完成した最終結果ではなく、生成途中のスナップショットを受け取れます。状態に応じてUIを少しずつ更新できるので、最終結果を待つより自然に見せられます。token単位の差分を自分でつなげるというより、現時点でモデルが生成できている内容をsnapshotとして見るイメージです。
+`streamResponse`では、完成した最終結果ではなく、生成途中のスナップショットを受け取れます。状態に応じてUIを少しずつ更新できるので、最終結果を待つより自然に見せられます。token単位の差分を自分でつなげるというより、現時点でモデルが生成できている内容をsnapshotとして受け取るイメージです。
 
-たとえば:
+少し雑な例ですが、たとえば:
 
 ```swift
 var session: LanguageModelSession = LanguageModelSession()
