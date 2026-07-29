@@ -1,4 +1,10 @@
-
+---
+title: "Private Cloud ComputeでFoundation Modelsをクラウドに拡張する"
+emoji: "☁️"
+type: "tech"
+topics: [PrivateCloudCompute, FoundationModels, WWDC2026, AI, Apple]
+published: false
+---
 
 Private Cloud Compute (PCC) は、デバイス上の処理能力を超える高度なAIタスクを、極めて高いプライバシー基準を保ちながらクラウド上で実行するAppleの言語モデルです。
 
