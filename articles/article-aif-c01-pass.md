@@ -3,7 +3,7 @@ title: "AWS Certified AI Practitioner（AIF-C01）合格体験記"
 emoji: "🎓"
 type: "idea"
 topics: [AWS, 資格, 合格体験記, AIプラクティショナー]
-published: false
+published: true
 ---
 
 AWS Certified AI Practitioner（AIF-C01）に合格しました。
